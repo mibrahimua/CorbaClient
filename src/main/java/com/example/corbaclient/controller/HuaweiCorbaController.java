@@ -13,6 +13,6 @@ public class HuaweiCorbaController {
     @GetMapping("/hello")
     public String hello() {
 
-        return huaweiClient.getHello("NameService");
+        return huaweiClient.getDetailCustomer("NameService");
     }
 }

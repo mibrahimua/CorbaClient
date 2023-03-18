@@ -1,8 +1,8 @@
 package com.example.corbaclient.corba.huawei;
 
 import com.example.corbaclient.corba.SingletonORB;
-import com.example.corbaclient.corba.huawei.EchoApp.Echo;
-import com.example.corbaclient.corba.huawei.EchoApp.EchoHelper;
+import com.example.corbaclient.corba.huawei.HelloApp.Hello;
+import com.example.corbaclient.corba.huawei.HelloApp.HelloHelper;
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
@@ -32,15 +32,14 @@ public class HuaweiClient {
         return NamingContextExtHelper.narrow(objRef);
     }
 
-    public String getHello(String serviceName) {
+    public String getDetailCustomer(String serviceName) {
         try {
             NamingContextExt contextExt = getCorbaService(serviceName);
-            Echo href = EchoHelper.narrow(contextExt.resolve_str("ECHO-SERVER"));
-            return href.echoString();
+            Hello href = HelloHelper.narrow(contextExt.resolve_str("HELLO-SERVER"));
+            return href.getDetailCustomer();
         } catch (CannotProceed | InvalidName | NotFound cannotProceed) {
-            cannotProceed.printStackTrace();
+            return cannotProceed.toString();
         }
-        return "Invalid Service";
     }
 
 
